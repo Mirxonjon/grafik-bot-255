@@ -16,6 +16,11 @@ bot.on('message' ,  async msg => {
     }
 
     if(user) {
+
+        
+        if(text == '/logout' ){
+            logout(msg)
+        }
         if(user.action == 'choose_language') {
             chooseLanguage(msg)
         }

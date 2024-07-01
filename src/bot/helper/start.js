@@ -72,6 +72,20 @@ const  start = async( msg ) => {
 
 }
 
+const logout = async (msg) => {
+    const chatId = msg.from.id
+    let user = await User.findOne({chatId}).lean()
+
+    try {
+        await User.deleteOne({chatId})
+        bot.sendMessage(chatId ,  user.language == 'uz' ? 'Botdan butunlay chiqib kettingiz, qayta faollashtirish uchun /start ni bosing.' : 'Вы полностью отключились из бота, перейдите в /start для возобновления.')
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 
 
 const  chooseLanguage = async (msg) => {
@@ -372,6 +386,7 @@ const retryrequestContact = async (msg) => {
 
 module.exports = {
     start,
+    logout,
     chooseLanguage,
     idRMO,
     addName,
