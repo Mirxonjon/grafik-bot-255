@@ -2,7 +2,7 @@ const User = require('../model/user')
 const {bot} = require('./bot')
 const { getAlltime, addApplication, addDayOffFirst, addDayOffSecond, addComment, sentApplication, showApplication, SentMessagetoUser, addSupervazer } = require('./helper/application')
 const { chooseNewLanguage, changeLanguage } = require('./helper/language')
-const { start, chooseLanguage ,addName, requestContact, idRMO, retryrequestContact } = require('./helper/start')
+const { start, chooseLanguage ,addName, requestContact, idRMO, retryrequestContact, logout } = require('./helper/start')
 const { ShowDepeartment, allAnswers, positiveAnswers, positiveAnswersMoth, rejectedAnswersMoth, allAnswersMoth, allUsers, sentMessageToAllUsers, sentMessageToAllUsersMenu, sentGraficToUsers } = require('./helper/statistic')
 
 bot.on('message' ,  async msg => {

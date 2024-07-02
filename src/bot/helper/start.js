@@ -371,7 +371,7 @@ const retryrequestContact = async (msg) => {
     } else {
         bot.sendMessage(
             chatId,
-            user.language == 'uz' ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user.phone.slice(-3)}  ${user.phone2.includes('+99') ? `, +998******${user.phone2?.slice(-3)}` : '' })` :   `📱Пожалуйста, введите правильно (например: +998******${user.phone.slice(-3)}  ${user.phone2 ? `, +998******${user.phone2?.slice(-3)}` : ')' })`,
+             user.language == 'uz' ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user.phone.slice(-3)}  ${user.phone2.includes('+99') ? `, +998******${user.phone2?.slice(-3)}` : '' })` :   `📱Пожалуйста, введите правильно (например: +998******${user.phone.slice(-3)}  ${user.phone2 ? `, +998******${user.phone2?.slice(-3)}` : ')' })`,
             {
                 reply_markup: {
                 remove_keyboard: true
