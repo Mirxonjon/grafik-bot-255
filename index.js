@@ -2,7 +2,8 @@ const  express = require('express')
 const mongoose = require('mongoose')
 const {CronJob} = require('cron')
 const  cron = require('cron')
-const { updateAllOperatorDate } = require('./src/utils/time')
+const { updateAllOperatorDate, sentAllOperatorGrafic } = require('./src/utils/time')
+const User = require('./src/model/user')
 
 // import { CronJob } from 'cron';
 const app = express()
@@ -41,3 +42,36 @@ async function dev() {
 }
 
 dev()
+
+
+app.get('/getAllUsers',async (req, res) => {
+    const users = await User.find({status:true}).lean()
+    //  console.log(users);
+        res.json({
+            message: 'ok',
+            users
+            })
+    })
+
+    app.get('/updateOperators',async (req, res) => {
+        // const users = await Applications.find().populate('user').lean()
+        //  console.log(users);
+
+        await updateAllOperatorDate(); 
+            res.json({
+                message: 'update',
+                
+                })
+        })
+
+        app.get('/send-message-all-users',async (req, res) => {
+            // const users = await Applications.find().populate('user').lean()
+            //  console.log(users);
+           await sentAllOperatorGrafic()
+    
+            await updateAllOperatorDate(); 
+                res.json({
+                    message: 'sended message',
+                    
+                    })
+            })

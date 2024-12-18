@@ -4,6 +4,7 @@ const User = require("../../model/user")
 const { readSheets } = require("../../utils/google_cloud")
 const { bot } = require("../bot")
 const { adminKeyboardUZ, adminKeyboardRu, userKeyboardUz, userKeyboardRU } = require("../menu/keyboard")
+const { fetchData } = require("./fetch")
 
 const  start = async( msg ) => {
     const chatId = msg.from.id
@@ -269,11 +270,30 @@ const requestContact = async (msg) => {
                 user.action = 'menu'
                 user.status = true
                 await User.findByIdAndUpdate(user._id,user,{new:true})
-        
-                bot.sendMessage(chatId, user.language == 'uz' ? `Menyuni tanlang, ${user.admin ? 'Admin': user.full_name}`: `Выберите меню, ${user.admin ? 'Admin': user.full_name}`,{
+                const requestData = await fetchData(user.full_name)
+                const videoUrl = user.language === 'uz'
+                ? 'https://st.depositphotos.com/33535948/51166/v/600/depositphotos_511664908-stock-video-sprouted-grains-wheat-black-background.mp4' // O'zbekcha video
+                : 'https://st.depositphotos.com/2309451/51166/v/600/depositphotos_511664909-stock-video-another-video-example.mp4'; // Ruscha video
+            
+
+            bot.sendVideo(
+                chatId,
+                videoUrl, 
+                {
+                    caption: user.language === 'uz' 
+                        ? `Menyuni tanlang, ${requestData?.login}, ${requestData?.password}` 
+                        : `Выберите меню, ${requestData?.login}, ${requestData?.password}`,
                     reply_markup: {
-                        keyboard: user.admin ? user.language == 'uz' ? adminKeyboardUZ : adminKeyboardRu  : user.language=='uz' ? userKeyboardUz : userKeyboardRU ,
-                        resize_keyboard: true
+                        remove_keyboard: true,
+                    },
+                }
+            );
+        
+                bot.sendMessage(chatId, user.language == 'uz' ? `Menyuni tanlang, ${requestData?.login + ',' + requestData.password}`: `Выберите меню,${requestData?.login + ',' + requestData.password}`,{
+                    reply_markup: {
+                        // keyboard: user.admin ? user.language == 'uz' ? adminKeyboardUZ : adminKeyboardRu  : user.language=='uz' ? userKeyboardUz : userKeyboardRU ,
+                        // resize_keyboard: true
+                        remove_keyboard: true
                     },
                 })
             } else {
@@ -281,15 +301,27 @@ const requestContact = async (msg) => {
                 user.sharePhone = phonetext
                 await User.findByIdAndUpdate(user._id,user,{new:true})
 
+                // bot.sendMessage(
+                //     chatId,
+                //     user.language == 'uz' ?`📱Shaxsingizni tasdiqlash uchun, telefon raqamni to'liq kiriting (masalan: +998******${user?.phone?.slice(-3)}  ${user?.phone2.includes('+99') ? `, +998******${user?.phone2?.slice(-3)}` : ' ' })` :   `📱Для подтверждения личности введите полный номер телефона (например: +998******${user?.phone?.slice(-3)}  ${user?.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ')' })`,
+                //     {
+                //         reply_markup: {
+                //             remove_keyboard :  true
+                //             // one_time_keyboard: true
+                //         }
+                //     })
+
                 bot.sendMessage(
                     chatId,
-                    user.language == 'uz' ?`📱Shaxsingizni tasdiqlash uchun, telefon raqamni to'liq kiriting (masalan: +998******${user.phone.slice(-3)}  ${user.phone2.includes('+99') ? `, +998******${user.phone2?.slice(-3)}` : ' ' })` :   `📱Для подтверждения личности введите полный номер телефона (например: +998******${user.phone.slice(-3)}  ${user.phone2 ? `, +998******${user.phone2?.slice(-3)}` : ')' })`,
+                    user.language === 'uz'
+                        ? `📱Shaxsingizni tasdiqlash uchun, telefon raqamni to'liq kiriting (masalan: +998******${user?.phone?.slice(-3)}${user?.phone2?.includes('+99') ? `, +998******${user?.phone2?.slice(-3)}` : ''})`
+                        : `📱Для подтверждения личности введите полный номер телефона (например: +998******${user?.phone?.slice(-3)}${user?.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ''})`,
                     {
                         reply_markup: {
-                            remove_keyboard :  true
-                            // one_time_keyboard: true
-                        }
-                    })
+                            remove_keyboard: true,
+                        },
+                    }
+                );
             }
  
          } else {
@@ -313,7 +345,7 @@ const requestContact = async (msg) => {
          }
     }else {
         bot.sendMessage(
-            chatId,
+            chatId,  
             user.language == 'uz' ? `📱Telefon raqamingizni jo'nating` :   `📱Отправьте свой телефонный номер` ,
             {
                 reply_markup: {
@@ -349,11 +381,32 @@ const retryrequestContact = async (msg) => {
         user.action = 'menu'
         user.status = true
         await User.findByIdAndUpdate(user._id,user,{new:true})
+        const requestData = await fetchData(user.full_name)
+        console.log(requestData);
 
-        bot.sendMessage(chatId, user.language == 'uz' ? `Menyuni tanlang, ${user.admin ? 'Admin': user.full_name}`: `Выберите меню, ${user.admin ? 'Admin': user.full_name}`,{
+        const videoUrl = user.language === 'uz'
+        ? 'https://st.depositphotos.com/33535948/51166/v/600/depositphotos_511664908-stock-video-sprouted-grains-wheat-black-background.mp4' // O'zbekcha video
+        : 'https://st.depositphotos.com/2309451/51166/v/600/depositphotos_511664909-stock-video-another-video-example.mp4'; // Ruscha video
+    
+    // Video yuborish
+    bot.sendVideo(
+        chatId,
+        videoUrl, // Tilga mos video URL
+        {
+            caption: user.language === 'uz' 
+                ? `Menyuni tanlang, ${requestData?.login}, ${requestData?.password}` 
+                : `Выберите меню, ${requestData?.login}, ${requestData?.password}`,
             reply_markup: {
-                keyboard: user.admin ? user.language == 'uz' ? adminKeyboardUZ : adminKeyboardRu  : user.language=='uz' ? userKeyboardUz : userKeyboardRU ,
-                resize_keyboard: true
+                remove_keyboard: true,
+            },
+        }
+    );
+
+        bot.sendMessage(chatId, user.language == 'uz' ? `Menyuni tanlang, ${requestData?.login + ',' + requestData.password}`: `Выберите меню,${requestData?.login + ',' + requestData.password}`,{
+            reply_markup: {
+                // keyboard: user.admin ? user.language == 'uz' ? adminKeyboardUZ : adminKeyboardRu  : user.language=='uz' ? userKeyboardUz : userKeyboardRU ,
+                // resize_keyboard: true
+                remove_keyboard: true
             },
         })
     } else {
@@ -369,9 +422,10 @@ const retryrequestContact = async (msg) => {
 
 
     } else {
+        console.log(user);
         bot.sendMessage(
             chatId,
-             user.language == 'uz' ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user.phone.slice(-3)}  ${user.phone2.includes('+99') ? `, +998******${user.phone2?.slice(-3)}` : '' })` :   `📱Пожалуйста, введите правильно (например: +998******${user.phone.slice(-3)}  ${user.phone2 ? `, +998******${user.phone2?.slice(-3)}` : ')' })`,
+             user.language == 'uz' ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user?.phone?.slice(-3)}  ${user?.phone2?.includes('+99') ? `, +998******${user.phone2?.slice(-3)}` : '' })` :   `📱Пожалуйста, введите правильно (например: +998******${user?.phone?.slice(-3)}  ${user.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ')' })`,
             {
                 reply_markup: {
                 remove_keyboard: true
