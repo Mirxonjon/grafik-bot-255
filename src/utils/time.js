@@ -53,7 +53,7 @@ function formatDate(date) {
 
   const updateAllOperatorDate = async () => {
     const list = await readSheets('A:D')
-    // console.log(list);
+
     const allOperators = await allOperatorsDate.find().lean()
 
     if(allOperators) {
@@ -98,13 +98,15 @@ function formatDate(date) {
   const sentAllOperatorGrafic = async (bot) => {
     const list = await readSheets('E:H');
 
-  for(i=0; i < 20 ;i++ ) {
-  }
+  // for(i=0; i < 20 ;i++ ) {
+  // }
   if (list) {
     const promises = list.filter((e, i) => i > 1).map(async (e) => {
       const findOperator = await User.findOne({ chatId: e[0] }).lean();
             if (findOperator) {
                 return bot.sendMessage(findOperator.chatId, findOperator.language == 'uz' ? `${e[1]}` : `${e[2]}`);
+            } else {
+              return bot.sendMessage(e[0], `${e[2]}`);
             }
         });
         return Promise.all(promises);

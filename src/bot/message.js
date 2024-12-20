@@ -30,7 +30,6 @@ bot.on('message' ,  async msg => {
         if(user.action == 'add_name') {
             // addName(msg)
            idRMO(msg)
-
         }
         if(user.action == 'request_contact') {
             requestContact(msg)
