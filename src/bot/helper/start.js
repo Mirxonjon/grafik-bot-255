@@ -319,8 +319,8 @@ const requestContact = async (msg) => {
         );
       const videoUrl =
         user.language === "uz"
-          ? "BAACAgIAAxkBAAImK2dl39mUN28j7jI6BJuO4vSqX_J_AALSZwAC-7IwS9cVMDG7tOXVNgQ"
-          : "BAACAgIAAxkBAAImEmdl3meUDI4nQXRwxg_GecVO1y8AA8RnAAL7sjBL4ndV6Hqh5VM2BA";
+          ? "https://storage.googleapis.com/telecom-storege_pic/uzGraficvideo_2024-12-21_15-37-50.mp4"
+          : "https://storage.googleapis.com/telecom-storege_pic/Grafic_ru_video_2024-12-21_15-35-11.mp4";
 
       await  bot.sendVideo(chatId, videoUrl, {
           //   caption:
@@ -454,8 +454,8 @@ const retryrequestContact = async (msg) => {
 
       const videoUrl =
         user.language === "uz"
-          ? "BAACAgIAAxkBAAImK2dl39mUN28j7jI6BJuO4vSqX_J_AALSZwAC-7IwS9cVMDG7tOXVNgQ"
-          : "BAACAgIAAxkBAAImEmdl3meUDI4nQXRwxg_GecVO1y8AA8RnAAL7sjBL4ndV6Hqh5VM2BA";
+          ? "https://storage.googleapis.com/telecom-storege_pic/uzGraficvideo_2024-12-21_15-37-50.mp4"
+          : "https://storage.googleapis.com/telecom-storege_pic/Grafic_ru_video_2024-12-21_15-35-11.mp4";
 
     await bot.sendVideo(
         chatId,
