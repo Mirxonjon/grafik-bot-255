@@ -42,7 +42,7 @@ async function dev() {
       console.log("server is runing");
     });
 
-    await updateAllOperatorDate();
+    // await updateAllOperatorDate();
   } catch (error) {
     console.log(error);
   }
