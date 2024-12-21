@@ -69,13 +69,13 @@ app.get("/updateOperators", async (req, res) => {
   });
 });
 
-app.get("/send-message-all-users", async (req, res) => {
-  // const users = await Applications.find().populate('user').lean()
-  //  console.log(users);
-  await sentAllOperatorGrafic();
+// app.get("/send-message-all-users", async (req, res) => {
+//   // const users = await Applications.find().populate('user').lean()
+//   //  console.log(users);
+//   await sentAllOperatorGrafic();
 
-  // await updateAllOperatorDate();
-  res.json({
-    message: "sended message",
-  });
-});
+//   // await updateAllOperatorDate();
+//   res.json({
+//     message: "sended message",
+//   });
+// });
