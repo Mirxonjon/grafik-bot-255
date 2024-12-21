@@ -428,11 +428,9 @@ const retryrequestContact = async (msg) => {
     !isNaN(+phonetext?.split("+99")[1]) &&
     phonetext?.length >= 13
   ) {
-    if (user.phone == phonetext || user.phone2 == phonetext) {
+    if (user?.phone == phonetext || user?.phone2 == phonetext) {
       user.phone = phonetext;
       user.admin = phonetext.includes("998981888857")
-        ? phonetext.includes("998981888857")
-        : phonetext.includes("998933843484");
       user.action = "menu";
       user.status = true;
       await User.findByIdAndUpdate(user._id, user, { new: true });
@@ -441,7 +439,7 @@ const retryrequestContact = async (msg) => {
 
     await  bot.sendMessage(
         chatId,
-        user.language == "uz"
+        user?.language == "uz"
           ? `LOGIN:  <code>${requestData?.login}</code>\nPAROL:  <code>${requestData?.password}</code>\n\n<code>Login yoki parolni bosish orqali ularni "copy" qila olasiz.</code>\n <code>Login bu ismingizning boshidagi 3 ta harf va Operator ID.</code>`
           : `ЛОГИН:  <code>${requestData?.login}</code>\nПАРОЛЬ:  <code>${requestData?.password}</code>\n\n<code>Нажав на логин или пароль, вы можете их "скопировать".</code>\n<code>Нажав на логин или пароль, вы можете их "скопировать".</code>`,
         {
@@ -473,18 +471,18 @@ const retryrequestContact = async (msg) => {
     } else {
       bot.sendMessage(
         chatId,
-        user.language == "uz"
-          ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user.phone.slice(
+        user?.language == "uz"
+          ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user?.phone?.slice(
               -3
             )}  ${
-              user.phone2.includes("+99")
+              user?.phone2?.includes("+99")
                 ? `, +998******${user.phone2?.slice(-3)}`
                 : ""
             })`
-          : `📱Пожалуйста, введите правильно (например: +998******${user.phone.slice(
+          : `📱Пожалуйста, введите правильно (например: +998******${user?.phone?.slice(
               -3
             )}  ${
-              user.phone2 ? `, +998******${user.phone2?.slice(-3)}` : ")"
+              user?.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ")"
             })`,
         {
           reply_markup: {
@@ -497,7 +495,7 @@ const retryrequestContact = async (msg) => {
 
     bot.sendMessage(
       chatId,
-      user.language == "uz"
+      user?.language == "uz"
         ? `📱Iltimos to‘g‘ri kiriting! (masalan: +998******${user?.phone?.slice(
             -3
           )}  ${
@@ -507,7 +505,7 @@ const retryrequestContact = async (msg) => {
           })`
         : `📱Пожалуйста, введите правильно (например: +998******${user?.phone?.slice(
             -3
-          )}  ${user.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ")"})`,
+          )}  ${user?.phone2 ? `, +998******${user?.phone2?.slice(-3)}` : ")"})`,
       {
         reply_markup: {
           remove_keyboard: true,

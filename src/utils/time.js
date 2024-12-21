@@ -106,7 +106,9 @@ function formatDate(date) {
             if (findOperator) {
                 return bot.sendMessage(findOperator.chatId, findOperator.language == 'uz' ? `${e[1]}` : `${e[2]}`);
             } else {
-              return bot.sendMessage(e[0], `${e[2]}`);
+              if (e[0]) {
+                return bot.sendMessage(e[0], `${e[2]}`);
+              }
             }
         });
         return Promise.all(promises);
