@@ -11,6 +11,7 @@ const {
   showApplication,
   SentMessagetoUser,
   addSupervazer,
+  deleteAllData,
 } = require("./helper/application");
 const { chooseNewLanguage, changeLanguage } = require("./helper/language");
 const {
@@ -55,7 +56,6 @@ bot.on("message", async (msg) => {
       idRMO(msg);
     }
     if (user.action == "add_name") {
-      // addName(msg)
       idRMO(msg);
     }
     if (user.action == "request_contact") {
@@ -67,65 +67,68 @@ bot.on("message", async (msg) => {
 
     if (text == "/sentMessage"  ){
         sentAllOperatorGrafic(bot);
-        console.log('okkkkkkkk ishladiiiiii');
     }
 
-    // if(text == `🇷🇺/🇺🇿 Tilni o‘zgartirish` || text == `🇷🇺/🇺🇿 Сменить язык`) {
-    //     changeLanguage(msg)
-    // }
-    // if(text == 'So‘rovnoma qoldirish' || text == `Оставить запрос`) {
-    //     getAlltime(msg)
-    // }
-    // if(user.action == `choose_new_language`) {
-    //     chooseNewLanguage(msg)
-    // }
-    // if(user.action == 'addtime') {
-    //     addApplication(msg)
-    // }
-    // if(user.action == 'add_supervayzer') {
-    //     addSupervazer(msg)
-    // }
-    // if(user.action == 'add_day_off_first') {
-    //     addDayOffFirst(msg)
-    // }
-    // if(user.action == 'add_day_off_second') {
-    //     addDayOffSecond(msg)
-    // }
-    // if(user.action == 'application_comment') {
-    //     addComment(msg)
-    // }
-    // if(user.action == 'sent') {
-    //     sentApplication(msg)
-    // }
-    // if(user.action.includes('sent_message_to-')){
-    //     SentMessagetoUser(msg)
-    // }
-    // if(user.action.includes('sent-message-all')){
-    //     sentMessageToAllUsers(msg)
-    // }
-    // if(user.admin) {
-    //     if(text == 'So‘rovnomalar' || text == 'Запросы'  ) {
-    //         showApplication(msg)
-    //     }
-    //     if(text == 'Statistika'  || text == 'Статистика') {
-    //         ShowDepeartment(msg)
-    //     }
-    //     if(text == 'Hal etilganlar' || text == 'Решено' ) {
-    //         positiveAnswersMoth(msg)
-    //     }
-    //     if(text == 'Rad etilganlar' || text == 'Отклоненный') {
-    //         rejectedAnswersMoth(msg)
-    //     }
-    //     if(text == 'Hammasi' || text == 'Все') {
-    //         allAnswersMoth(msg)
-    //     }
-    //     if(text == 'Foydalanuvchilar' || text == 'Пользователи') {
-    //         allUsers(msg)
-    //     }
-    //     if(text == 'Xabar yuborish' || text == 'Отправит сообшения') {
-    //         sentMessageToAllUsersMenu(msg)
-    //     }
+      if (text == "/deleteAllData") {
+        deleteAllData(bot);
+      }
 
-    // }
+ /*    if(text == `🇷🇺/🇺🇿 Tilni o‘zgartirish` || text == `🇷🇺/🇺🇿 Сменить язык`) {
+        changeLanguage(msg)
+    }
+    if(text == 'So‘rovnoma qoldirish' || text == `Оставить запрос`) {
+        getAlltime(msg)
+    }
+    if(user.action == `choose_new_language`) {
+        chooseNewLanguage(msg)
+    }
+    if(user.action == 'addtime') {
+        addApplication(msg)
+    }
+    if(user.action == 'add_supervayzer') {
+        addSupervazer(msg)
+    }
+    if(user.action == 'add_day_off_first') {
+        addDayOffFirst(msg)
+    }
+    if(user.action == 'add_day_off_second') {
+        addDayOffSecond(msg)
+    }
+    if(user.action == 'application_comment') {
+        addComment(msg)
+    }
+    if(user.action == 'sent') {
+        sentApplication(msg)
+    }
+    if(user.action.includes('sent_message_to-')){
+        SentMessagetoUser(msg)
+    }
+    if(user.action.includes('sent-message-all')){
+        sentMessageToAllUsers(msg)
+    }
+    if(user.admin) {
+        if(text == 'So‘rovnomalar' || text == 'Запросы'  ) {
+            showApplication(msg)
+        }
+        if(text == 'Statistika'  || text == 'Статистика') {
+            ShowDepeartment(msg)
+        }
+        if(text == 'Hal etilganlar' || text == 'Решено' ) {
+            positiveAnswersMoth(msg)
+        }
+        if(text == 'Rad etilganlar' || text == 'Отклоненный') {
+            rejectedAnswersMoth(msg)
+        }
+        if(text == 'Hammasi' || text == 'Все') {
+            allAnswersMoth(msg)
+        }
+        if(text == 'Foydalanuvchilar' || text == 'Пользователи') {
+            allUsers(msg)
+        }
+        if(text == 'Xabar yuborish' || text == 'Отправит сообшения') {
+            sentMessageToAllUsersMenu(msg)
+        }
+
+    } */
   }
 });

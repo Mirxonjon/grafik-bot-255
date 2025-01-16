@@ -17,17 +17,15 @@ app.use(express.json());
 require("./src/bot/bot");
 
 const job = new CronJob(
-  "9 * * * * *", // cronTime
-  // '0 59 23 * * *',
+  // "9 * * * * *", // cronTime
+  '0 59 23 * * *',
   async () => {
     await updateAllOperatorDate();
-  }, // onTick
-  null, // onComplete
-  true, // start
-  "Asia/Tashkent" // timeZone
+  }, 
+  null, 
+  true, 
+  "Asia/Tashkent" 
 );
-// const dt = cron.sendAt('* * * * *');
-// console.log(`The job would run at: ${dt.toISO()}`);
 
 async function dev() {
   try {
@@ -42,9 +40,9 @@ async function dev() {
       console.log("server is runing");
     });
 
-    // await updateAllOperatorDate();
+    await updateAllOperatorDate();
   } catch (error) {
-    console.log(error);
+    // console.log(error.message);
   }
 }
 
@@ -52,7 +50,6 @@ dev();
 
 app.get("/getAllUsers", async (req, res) => {
   const users = await User.find({ status: true }).lean();
-  //  console.log(users);
   res.json({
     message: "ok",
     users,
