@@ -5,6 +5,7 @@ const cron = require("cron");
 const {
   updateAllOperatorDate,
   sentAllOperatorGrafic,
+  sentMessage,
 } = require("./src/utils/time");
 const User = require("./src/model/user");
 
@@ -66,13 +67,13 @@ app.get("/updateOperators", async (req, res) => {
   });
 });
 
-// app.get("/send-message-all-users", async (req, res) => {
-//   // const users = await Applications.find().populate('user').lean()
-//   //  console.log(users);
-//   await sentAllOperatorGrafic();
+app.post("/send-message", async (req, res) => {
+  const { chatId, message } = req.body
+  console.log(chatId , message);
+  
+  await sentMessage(chatId , message);
 
-//   // await updateAllOperatorDate();
-//   res.json({
-//     message: "sended message",
-//   });
-// });
+  res.json({
+    message: "sended message",
+  });
+});

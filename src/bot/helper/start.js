@@ -301,7 +301,9 @@ const requestContact = async (msg) => {
             : `❗️Для <b> подтверждения вашей личности</b> укажите <b>полный</b> номер телефона: +998******${user?.phone?.slice(
                 -3
               )}${
-                user?.phone2 ? ` или +998******${user?.phone2?.slice(-3)}` : ""
+                user?.phone2?.includes("+99")
+                  ? ` или +998******${user?.phone2?.slice(-3)}`
+                  : ""
               }`,
           {
             parse_mode: "HTML",

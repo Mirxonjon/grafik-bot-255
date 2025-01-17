@@ -1,6 +1,8 @@
 const allOperatorsDate = require("../model/allOperatorsDate");
 const User = require("../model/user");
 const { readSheets } = require("./google_cloud");
+const axios = require("axios");
+
 
 const jobTime = [
   "07:00 - 16:00",
@@ -172,6 +174,26 @@ const sentAllOperatorGrafic = async (bot) => {
   }
 };
 
+const sentMessage = async (chatId, message) => {
+  try {
+    const botToken = process.env.TOKEN; 
+    const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+
+    const response = await axios.post(apiUrl, {
+      chat_id: chatId,
+      text: message,
+    });
+
+
+    return response.data;
+  } catch (error) {
+    // Xatolikni qayta ishlash
+    console.error(`Error sending message to ${chatId}:`, error.message);
+    throw new Error(`Error sending message to ${chatId}`);
+  }
+};
+
 // const sentAllOperatorGrafic = async (bot) => {
 //   const list = await readSheets('E:H');
 
@@ -200,4 +222,5 @@ module.exports = {
   updateAllOperatorDate,
   Supervayzers,
   sentAllOperatorGrafic,
+  sentMessage,
 };
