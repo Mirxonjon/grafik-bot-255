@@ -194,6 +194,16 @@ const sentMessage = async (chatId, message) => {
   }
 };
 
+const deleteAllData = async () => {
+  //   const chatId = msg.from.id;
+  try {
+    await allOperatorsDate.deleteMany({});
+    // let text = `База данных удаленна`;
+  } catch (error) {
+    console.error("Xatolik yuz berdi:", error);
+  }
+};
+
 // const sentAllOperatorGrafic = async (bot) => {
 //   const list = await readSheets('E:H');
 
@@ -223,4 +233,5 @@ module.exports = {
   Supervayzers,
   sentAllOperatorGrafic,
   sentMessage,
+  deleteAllData,
 };

@@ -6,9 +6,10 @@ const {
   updateAllOperatorDate,
   sentAllOperatorGrafic,
   sentMessage,
+  deleteAllData,
 } = require("./src/utils/time");
 const User = require("./src/model/user");
-const { deleteAllData } = require("./src/bot/helper/application");
+
 
 // import { CronJob } from 'cron';
 const app = express();
