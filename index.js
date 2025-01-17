@@ -8,6 +8,7 @@ const {
   sentMessage,
 } = require("./src/utils/time");
 const User = require("./src/model/user");
+const { deleteAllData } = require("./src/bot/helper/application");
 
 // import { CronJob } from 'cron';
 const app = express();
@@ -64,6 +65,16 @@ app.get("/updateOperators", async (req, res) => {
   await updateAllOperatorDate();
   res.json({
     message: "update",
+  });
+});
+
+app.get("/deleteAllData", async (req, res) => {
+  // const users = await Applications.find().populate('user').lean()
+  //  console.log(users);
+
+  await deleteAllData();
+  res.json({
+    message: "delete",
   });
 });
 

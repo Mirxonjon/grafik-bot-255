@@ -1257,16 +1257,12 @@ ${
   }
 };
 
-const deleteAllData = async (msg) => {
-  const chatId = msg.from.id;
+const deleteAllData = async () => {
+//   const chatId = msg.from.id;
   try {
     await allOperatorsDate.deleteMany({});
-    let text = `База данных удаленна`;
-    await bot.sendMessage(chatId, text, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
+    // let text = `База данных удаленна`;
+
   } catch (error) {
     console.error("Xatolik yuz berdi:", error);
   }
